@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Runs blkls to collect unallocated storage, then determines the cluster size from the disk image with fsstat, then runs foremost with the appropriate parameters to carve out deleted files.</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>DISK_IMAGE_FILE</name>
+          <description></description>
+          <defaultValue>/cases/xp-tdungan-10.3.58.7/xp-tdungan-c-drive/xp-tdungan-c-drive.E01</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>UNALLOCATED_STORAGE_FILE</name>
+          <description></description>
+          <defaultValue>${OUTPUT_LOCATION}/xp-tdungan-c-drive.blkls</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>FOREMOST_OUTPUT</name>
+          <description></description>
+          <defaultValue>${OUTPUT_LOCATION}/foremost</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>OUTPUT_LOCATION</name>
+          <description>Location of evidence processing artifacts</description>
+          <defaultValue>/artifacts/xp-tdungan-10.3.58.7</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>blkls $DISK_IMAGE_FILE &gt;$UNALLOCATED_STORAGE_FILE
+CLUSTER_SIZE=`fsstat $DISK_IMAGE_FILE | awk &apos;/Cluster Size: /{print $3}&apos;`
+foremost -q -b $CLUSTER_SIZE -o $FOREMOST_OUTPUT $UNALLOCATED_STORAGE_FILE</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

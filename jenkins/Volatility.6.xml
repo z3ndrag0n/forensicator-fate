@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Volatility - Step 6 - Dump Suspicious Processes and Drivers</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>VOLATILITY_LOCATION</name>
+          <description>Specify the location of the memory image to analyse.</description>
+          <defaultValue>file:///cases/xp-tdungan-10.3.58.7/xp-tdungan-memory/xp-tdungan-memory-raw.001</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>VOLATILITY_PROFILE</name>
+          <description>Specify the profile of the memory image to analyse.</description>
+          <defaultValue>WinXPSP3x86</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>OUTPUT_LOCATION</name>
+          <description>Specify the location of the memory image to analyse.</description>
+          <defaultValue>/artifacts/xp-tdungan-10.3.58.7</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>VOLATILITY_OUTPUT_LOCATION</name>
+          <description></description>
+          <defaultValue>${OUTPUT_LOCATION}/volatility-dumps</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>true</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>if  [[ ! -d $VOLATILITY_OUTPUT_LOCATION ]] ; then
+mkdir $VOLATILITY_OUTPUT_LOCATION
+fi
+vol.py dlldump --dump-dir ${VOLATILITY_OUTPUT_LOCATION}
+vol.py moddump --dump-dir ${VOLATILITY_OUTPUT_LOCATION}
+vol.py procdump --dump-dir ${VOLATILITY_OUTPUT_LOCATION}
+vol.py memdump --dump-dir ${VOLATILITY_OUTPUT_LOCATION}</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

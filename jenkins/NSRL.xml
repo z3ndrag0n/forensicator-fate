@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Unzip the NSRL zip found in the provided directory;&#xd;
+move the resulting file to /whitelist;&#xd;
+produce the indices;</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>NSRL_DOWNLOAD_DIRECTORY</name>
+          <description>The directory the NSRLFile.txt.zip archive has been downloaded to.</description>
+          <defaultValue>/home/sansforensics</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>cd /tmp &amp;&amp; unzip ${NSRL_DOWNLOAD_DIRECTORY}/NSRLFile.txt.zip &amp;&amp; mv NSRLFile.txt /whitelist &amp;&amp; cd /whitelist &amp;&amp; hfind -i nsrl-md5 NSRLFile.txt &amp;&amp; hfind -i nsrl-sha1 NSRLFile.txt</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
