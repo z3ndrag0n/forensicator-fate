@@ -17,18 +17,23 @@
           <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
+          <name>CASE_NAME</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
           <name>OUTPUT_LOCATION</name>
-          <description>Location of the fs timeline output file</description>
-          <defaultValue>/artifacts/xp-tdungan-10.3.58.7</defaultValue>
+          <description>Location of the evidence processing output</description>
+          <defaultValue>/artifacts/${CASE_NAME}</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>DISK_ARTIFACTS</name>
-          <description></description>
+          <description>Location of the evidence bulk_extractor produces stream processing the disk image</description>
           <defaultValue>${OUTPUT_LOCATION}/bulk_extractor_disk</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MEMORY_ARTIFACTS</name>
-          <description></description>
+          <description>Location of the evidence bulk_extractor produces stream processing the memory image</description>
           <defaultValue>${OUTPUT_LOCATION}/bulk_extractor_memory</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
