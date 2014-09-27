@@ -1,6 +1,6 @@
 #!/bin/sh
 sudo mkdir /ioc /blacklist /whitelist /reverse /artifacts
-sudo echo >> /etc/samba/smb.conf <<EOF
+sudo cat >>/etc/samba/smb.conf <<EOF
 [ioc]
 	path = /ioc
 	writeable = yes
