@@ -14,12 +14,22 @@
         <hudson.model.StringParameterDefinition>
           <name>KEYWORDS_FILE</name>
           <description></description>
-          <defaultValue>/cases/xp-tdungan-10.3.58.7/keywords.txt</defaultValue>
+          <defaultValue>/cases/${CASE_NAME}/keywords.txt</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MEMORY_ARTIFACTS</name>
           <description></description>
-          <defaultValue>/artifacts/xp-tdungan-10.3.58.7/bulk_extractor_memory</defaultValue>
+          <defaultValue>${OUTPUT_LOCATION}/bulk_extractor_memory</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>OUTPUT_LOCATION</name>
+          <description></description>
+          <defaultValue>/artifacts/${CASE_NAME}</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CASE_NAME</name>
+          <description>Name of the case - used to build output paths.</description>
+          <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
