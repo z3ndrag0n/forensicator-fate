@@ -51,3 +51,7 @@ java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 crea
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-view "Memory Analysis" <forensicator-fate/jenkins/views/MemoryAnalysis.xml
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-view "Helper Tasks" <forensicator-fate/jenkins/views/HelperTasks.xml
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-view "FindEvidence" <forensicator-fate/jenkins/views/FindEvidence.xml
+
+sudo cp forensicator-fate/scripts/guess_profile.pl /usr/bin
+sudo chown jenkins:jenkins /usr/bin/guess_profile.pl
+sudo chmod 755 /usr/bin/guess_profile.pl
