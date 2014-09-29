@@ -11,7 +11,7 @@ produce the indices;</description>
         <hudson.model.StringParameterDefinition>
           <name>NSRL_DOWNLOAD_DIRECTORY</name>
           <description>The directory the NSRLFile.txt.zip archive has been downloaded to.</description>
-          <defaultValue>/home/sansforensics</defaultValue>
+          <defaultValue>/home/sansforensics/Downloads</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
