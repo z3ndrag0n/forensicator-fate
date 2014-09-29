@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Volatility - Step 2 - Analyze Process DLLs and Handles</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>MEMORY_IMAGE_FILE</name>
+          <description>Pat of the raw memory image.</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>VOLATILITY_LOCATION</name>
+          <description>Specify the location of the memory image to analyse.</description>
+          <defaultValue>file://${MEMORY_IMAGE_FILE}</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>VOLATILITY_PROFILE</name>
+          <description>Specify the profile of the memory image to analyse.</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CASE_NAME</name>
+          <description>Name of the case - used to build output paths.</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>OUTPUT_LOCATION</name>
+          <description>Location of the evidence processing output</description>
+          <defaultValue>/artifacts/${CASE_NAME}</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>true</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>vol.py dlllist &gt;${OUTPUT_LOCATION}/dlllist_output
+vol.py getsids &gt;${OUTPUT_LOCATION}/getsids_output
+vol.py handles &gt;${OUTPUT_LOCATION}/handles_output
+vol.py filescan &gt;${OUTPUT_LOCATION}/filescan_output
+vol.py mutantscan &gt;${OUTPUT_LOCATION}/mutantscan_output
+vol.py svcscan &gt;${OUTPUT_LOCATION}/svcscan_output
+vol.py cmdscan &gt;${OUTPUT_LOCATION}/cmdscan_output
+vol.py consoles &gt;${OUTPUT_LOCATION}/consoles_output</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
