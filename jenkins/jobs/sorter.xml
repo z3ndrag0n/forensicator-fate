@@ -9,12 +9,27 @@
         <hudson.model.StringParameterDefinition>
           <name>DISK_IMAGE_FILE</name>
           <description></description>
-          <defaultValue>/cases/xp-tdungan-10.3.58.7/xp-tdungan-c-drive/xp-tdungan-c-drive.E01</defaultValue>
+          <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SORTER_ARTIFACTS</name>
           <description></description>
           <defaultValue>${OUTPUT_LOCATION}/sorter</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>DISK_NAME</name>
+          <description>Name of the disk for output.</description>
+          <defaultValue>C:</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>BLACKLIST</name>
+          <description>A list of hashes of files known to be bad</description>
+          <defaultValue>/blacklist/known_bad_files.txt</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>WHITELIST</name>
+          <description>A list of hashes of files we trust.</description>
+          <defaultValue>/whitelist/known_good_files.txt</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -31,7 +46,7 @@
       <command>if  [[ ! -d $SORTER_ARTIFACTS ]] ; then
 mkdir $SORTER_ARTIFACTS
 fi
-sorter -s -h -n /whitelist/NSRLFile.txt -a /blacklist/known_bad_files.txt -m C: -d $SORTER_ARTIFACTS $DISK_IMAGE_FILE</command>
+sorter -s -h -n /whitelist/NSRLFile.txt -a $BLACKLIST -x $WHITELIST -m ${DISK_NAME} -d $SORTER_ARTIFACTS $DISK_IMAGE_FILE</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
