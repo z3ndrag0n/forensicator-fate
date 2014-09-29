@@ -51,6 +51,16 @@
           <description>The target system type (if known) corresponding to any memory image supplied for analysis. If not provided, volatility will be invoked with the imageinfo plugin in an attempt to determine the correct value. </description>
           <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>WHITELIST</name>
+          <description>List of hashes of files we trust.</description>
+          <defaultValue>/whitelist/known_good_files.txt</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>BLACKLIST</name>
+          <description>List of hashes of known bad files.</description>
+          <defaultValue>/blacklist/known_bad_files.txt</defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
