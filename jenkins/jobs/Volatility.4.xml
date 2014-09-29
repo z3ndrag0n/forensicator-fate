@@ -7,19 +7,29 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
+          <name>MEMORY_IMAGE_FILE</name>
+          <description>Location of the raw memory image</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
           <name>VOLATILITY_LOCATION</name>
           <description>Specify the location of the memory image to analyse.</description>
-          <defaultValue>file:///cases/sift408pc-memory.img</defaultValue>
+          <defaultValue>file://${MEMORY_IMAGE_FILE}</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>VOLATILITY_PROFILE</name>
           <description>Specify the profile of the memory image to analyse.</description>
-          <defaultValue>Win7SP1x86</defaultValue>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CASE_NAME</name>
+          <description>Name of the case - used to build output paths.</description>
+          <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>OUTPUT_LOCATION</name>
           <description>Specify the location of the memory image to analyse.</description>
-          <defaultValue>/cases/sift408pc-memory.img_output_dir</defaultValue>
+          <defaultValue>/artifacts/${CASE_NAME}</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -34,7 +44,7 @@
   <builders>
     <hudson.tasks.Shell>
       <command>vol.py malfind --dump-dir ${OUTPUT_LOCATION}
-vol.py ldrmodules -v</command>
+vol.py ldrmodules -v &gt; ${OUTPUT_LOCATION}/ldrmodules_output</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
