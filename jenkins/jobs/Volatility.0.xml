@@ -7,9 +7,24 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
+          <name>MEMORY_IMAGE_FILE</name>
+          <description>Path of the memory image for volatility to process.</description>
+          <defaultValue>/cases/sift408pc-memory.img</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
           <name>VOLATILITY_LOCATION</name>
           <description>Specify the location of the memory image to analyse.</description>
-          <defaultValue>file:///cases/sift408pc-memory.img</defaultValue>
+          <defaultValue>file://${MEMORY_IMAGE_FILE}</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CASE_NAME</name>
+          <description>Name of the case - used to build output paths.</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>OUTPUT_LOCATION</name>
+          <description>Location for the volatility output</description>
+          <defaultValue>/artifacts/${CASE_NAME}</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -23,7 +38,7 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>vol.py imageinfo</command>
+      <command>vol.py imageinfo &gt;${OUTPUT_LOCATION}/imageinfo_output</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
