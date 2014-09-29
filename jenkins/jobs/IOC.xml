@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Move downloaded (or created!) Indicators of Compromise found in the provided directory to /ioc;</description>
+  <description>Copy downloaded (or created!) Indicators of Compromise found in the provided directory to /ioc;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.model.ParametersDefinitionProperty>
@@ -23,7 +23,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>mv ${IOC_DOWNLOAD_DIRECTORY}/*.ioc /ioc</command>
+      <command>cp ${IOC_DOWNLOAD_DIRECTORY}/*.ioc /ioc</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
