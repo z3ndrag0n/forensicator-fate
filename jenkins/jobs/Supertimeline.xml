@@ -9,12 +9,17 @@
         <hudson.model.StringParameterDefinition>
           <name>DISK_IMAGE_FILE</name>
           <description>Location of the disk image to create the supertimeline from</description>
-          <defaultValue>/cases/xp-tdungan-10.3.58.7/xp-tdungan-c-drive/xp-tdungan-c-drive.E01</defaultValue>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CASE_NAME</name>
+          <description>Name of the case - used to build the output path.</description>
+          <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>OUTPUT_LOCATION</name>
           <description>Location of the supertimeline output file</description>
-          <defaultValue>/artifacts/xp-tdungan-10.3.58.7</defaultValue>
+          <defaultValue>/artifacts/${CASE_NAME}</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>TIMEZONE</name>
