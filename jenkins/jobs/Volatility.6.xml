@@ -51,10 +51,10 @@
       <command>if  [[ ! -d $VOLATILITY_OUTPUT_LOCATION ]] ; then
 mkdir $VOLATILITY_OUTPUT_LOCATION
 fi
-vol.py dlldump --dump-dir ${VOLATILITY_OUTPUT_LOCATION}
-vol.py moddump --dump-dir ${VOLATILITY_OUTPUT_LOCATION}
-vol.py procdump --dump-dir ${VOLATILITY_OUTPUT_LOCATION}
-vol.py memdump --dump-dir ${VOLATILITY_OUTPUT_LOCATION}</command>
+vol.py dlldump --dump-dir ${VOLATILITY_OUTPUT_LOCATION} &gt;${OUTPUT_LOCATION}/dlldump_output
+vol.py moddump --dump-dir ${VOLATILITY_OUTPUT_LOCATION} &gt;${OUTPUT_LOCATION}/moddump_output
+vol.py procdump --dump-dir ${VOLATILITY_OUTPUT_LOCATION} &gt;${OUTPUT_LOCATION}/procdump_output
+vol.py memdump --dump-dir ${VOLATILITY_OUTPUT_LOCATION} &gt;${OUTPUT_LOCATION}/memdump_output</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
