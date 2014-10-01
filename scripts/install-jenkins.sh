@@ -28,6 +28,9 @@ java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 inst
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 install-plugin conditional-buildstep
 sudo service jenkins restart
 
+#wait for Jenkins to start
+until wget http://localhost:8080/ 2>&1 | grep "response" | grep -c "200 OK"; do echo Sleeping 15 seconds waiting for Jenkins to start... ; sleep 15 ; done
+
 #install jobs
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-job bulk_extractor_disk <forensicator-fate/jenkins/jobs/bulk_extractor_disk.xml
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-job bulk_extractor_memory <forensicator-fate/jenkins/jobs/bulk_extractor_memory.xml
@@ -54,7 +57,7 @@ java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 crea
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-view "Filesystem Analysis" <forensicator-fate/jenkins/views/FSAnalysis.xml
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-view "Memory Analysis" <forensicator-fate/jenkins/views/MemoryAnalysis.xml
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-view "Helper Tasks" <forensicator-fate/jenkins/views/HelperTasks.xml
-java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-view "FindEvidence" <forensicator-fate/jenkins/views/FindEvidence.xml
+java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-view "Find Evidence" <forensicator-fate/jenkins/views/ForensicatorFATE.xml
 
 sudo cp forensicator-fate/scripts/guess_profile.pl /usr/bin
 sudo chown jenkins:jenkins /usr/bin/guess_profile.pl
