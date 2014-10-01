@@ -4,8 +4,9 @@ sudo apt-get install apache2
 sudo apt-get install libapache2-mod-wsgi
 sudo a2enmod rewrite
 
-#Now add the following lines to /etc/apache2/sites-available/default, immediately preceding the ErrorLog directive:
-
+sudo ed /etc/apache2/sites-available/default <<EOF
+/ErrorLog
+i
 WSGIScriptAlias / /var/www/forensicator-fate
 Alias /static /var/www/public_html
 
@@ -23,6 +24,11 @@ AddType text/html .py
   RewriteCond %{REQUEST_URI} !^(/.*)+ffate.py/
   RewriteRule ^(.*)$ ffate.py/$1 [PT]
 </Location>
+.
+w
+q
+EOF
+
 
 sudo mkdir /var/www/forensicator-fate
 sudo mkdir /var/www/public_html
