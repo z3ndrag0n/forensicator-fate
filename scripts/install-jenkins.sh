@@ -2,7 +2,8 @@
 sudo apt-get install jenkins
 sudo chgrp jenkins /ioc /blacklist /whitelist /reverse /artifacts
 sudo chmod g+w /ioc /blacklist /whitelist /reverse /artifacts
-sudo echo "%jenkins ALL=(ALL:ALL) NOPASSWD:ALL" >/etc/sudoers.d/jenkins 
+sudo su - root -c 'echo "%jenkins ALL=(ALL:ALL) NOPASSWD:ALL" >/etc/sudoers.d/jenkins'
+sudo chmod ug=r /etc/sudoers.d/jenkins 
 
 #from lucabelmondo on github (comment on https://gist.github.com/rowan-m/1026918)
 wget -O default.js http://updates.jenkins-ci.org/update-center.json
