@@ -3,7 +3,8 @@ sudo apt-get install jenkins
 sudo chgrp jenkins /ioc /blacklist /whitelist /reverse /artifacts
 sudo chmod g+w /ioc /blacklist /whitelist /reverse /artifacts
 sudo su - root -c 'echo "%jenkins ALL=(ALL:ALL) NOPASSWD:ALL" >/etc/sudoers.d/jenkins'
-sudo chmod 440 /etc/sudoers.d/jenkins 
+sudo chmod 440 /etc/sudoers.d/jenkins
+sudo adduser sansforensics jenkins
 
 #from lucabelmondo on github (comment on https://gist.github.com/rowan-m/1026918)
 wget -O default.js http://updates.jenkins-ci.org/update-center.json
