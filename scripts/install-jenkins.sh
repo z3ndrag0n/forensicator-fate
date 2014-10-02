@@ -1,5 +1,7 @@
 #!/bin/sh
 sudo apt-get install jenkins
+#update Volatility to 2.4
+sudo apt-get install python-volatility
 sudo chgrp jenkins /ioc /blacklist /whitelist /reverse /artifacts
 sudo chmod g+w /ioc /blacklist /whitelist /reverse /artifacts
 sudo su - root -c 'echo "%jenkins ALL=(ALL:ALL) NOPASSWD:ALL" >/etc/sudoers.d/jenkins'
