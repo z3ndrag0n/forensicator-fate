@@ -33,7 +33,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>bulk_extractor -F $KEYWORDS_FILE -o $DISK_ARTIFACTS $DISK_IMAGE_FILE</command>
+      <command>if [[ ! -f $KEYWORDS_FILE ]]; then touch $KEYWORDS_FILE; fi
+bulk_extractor -F $KEYWORDS_FILE -o $DISK_ARTIFACTS $DISK_IMAGE_FILE</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
