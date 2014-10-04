@@ -43,10 +43,16 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>if  [[ ! -d $SORTER_ARTIFACTS ]] ; then
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+if  [[ ! -d $SORTER_ARTIFACTS ]] ; then
 mkdir $SORTER_ARTIFACTS
 fi
-sorter -s -h -n /whitelist/NSRLFile.txt -a $BLACKLIST -x $WHITELIST -m ${DISK_NAME} -d $SORTER_ARTIFACTS $DISK_IMAGE_FILE</command>
+if [[ -f /whitelist/NSRLFile.txt ]]; then
+sorter -s -h -n /whitelist/NSRLFile.txt -a $BLACKLIST -x $WHITELIST -m ${DISK_NAME} -d $SORTER_ARTIFACTS $DISK_IMAGE_FILE
+else
+sorter -s -h -a $BLACKLIST -x $WHITELIST -m ${DISK_NAME} -d $SORTER_ARTIFACTS $DISK_IMAGE_FILE
+fi</command>
+
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

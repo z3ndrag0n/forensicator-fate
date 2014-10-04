@@ -43,7 +43,8 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>vol.py timeliner --output=body &gt;${OUTPUT_LOCATION}/timeliner_bodyfile_output</command>
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+vol.py timeliner --output=body &gt;${OUTPUT_LOCATION}/timeliner_bodyfile_output</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

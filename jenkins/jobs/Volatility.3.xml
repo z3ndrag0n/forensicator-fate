@@ -43,7 +43,8 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>if  [[ $VOLATILITY_PROFILE =~ &quot;WinXP&quot; ]] ; then vol.py connections &gt;${OUTPUT_LOCATION}/connections_output &amp;&amp; vol.py connscan &gt;${OUTPUT_LOCATION}/connscan_output &amp;&amp; vol.py sockets &gt;${OUTPUT_LOCATION}/sockets_output &amp;&amp; vol.py sockscan &gt;${OUTPUT_LOCATION}/sockscan_output; elif [[ $VOLATILITY_PROFILE =~ &quot;Win2K3&quot; ]] ; then vol.py connections &gt;${OUTPUT_LOCATION}/connections_output &amp;&amp; vol.py connscan &gt;${OUTPUT_LOCATION}/connscan_output &amp;&amp; vol.py sockets &gt;${OUTPUT_LOCATION}/sockets_output &amp;&amp; vol.py sockscan &gt;${OUTPUT_LOCATION}/sockscan_output; elif [[ $VOLATILITY_PROFILE =~ &quot;Win&quot; ]] ; then vol.py netscan &gt;${OUTPUT_LOCATION}/netscan_output; else echo &quot;Unsupported Memory Image Profile to Review Network Artifacts&quot;; fi</command>
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+if  [[ $VOLATILITY_PROFILE =~ &quot;WinXP&quot; ]] ; then vol.py connections &gt;${OUTPUT_LOCATION}/connections_output &amp;&amp; vol.py connscan &gt;${OUTPUT_LOCATION}/connscan_output &amp;&amp; vol.py sockets &gt;${OUTPUT_LOCATION}/sockets_output &amp;&amp; vol.py sockscan &gt;${OUTPUT_LOCATION}/sockscan_output; elif [[ $VOLATILITY_PROFILE =~ &quot;Win2K3&quot; ]] ; then vol.py connections &gt;${OUTPUT_LOCATION}/connections_output &amp;&amp; vol.py connscan &gt;${OUTPUT_LOCATION}/connscan_output &amp;&amp; vol.py sockets &gt;${OUTPUT_LOCATION}/sockets_output &amp;&amp; vol.py sockscan &gt;${OUTPUT_LOCATION}/sockscan_output; elif [[ $VOLATILITY_PROFILE =~ &quot;Win&quot; ]] ; then vol.py netscan &gt;${OUTPUT_LOCATION}/netscan_output; else echo &quot;Unsupported Memory Image Profile to Review Network Artifacts&quot;; fi</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

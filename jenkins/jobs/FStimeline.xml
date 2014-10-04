@@ -43,7 +43,8 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>fls -r -m $DISK_NAME $DISK_IMAGE_FILE &gt;${OUTPUT_LOCATION}/bodyfile  &amp;&amp; mactime -d -b ${OUTPUT_LOCATION}/bodyfile -z $TIMEZONE &gt;${OUTPUT_LOCATION}/fs-timeline.csv</command>
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+fls -r -m $DISK_NAME $DISK_IMAGE_FILE &gt;${OUTPUT_LOCATION}/bodyfile  &amp;&amp; mactime -d -b ${OUTPUT_LOCATION}/bodyfile -z $TIMEZONE &gt;${OUTPUT_LOCATION}/fs-timeline.csv</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

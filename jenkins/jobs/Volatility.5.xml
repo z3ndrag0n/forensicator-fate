@@ -43,7 +43,8 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>vol.py psxview &gt;${OUTPUT_LOCATION}/psxview_output
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+vol.py psxview &gt;${OUTPUT_LOCATION}/psxview_output
 vol.py modscan &gt;${OUTPUT_LOCATION}/modscan_output
 vol.py apihooks &gt;${OUTPUT_LOCATION}/apihooks_output
 vol.py ssdt &gt;${OUTPUT_LOCATION}/ssdt_output

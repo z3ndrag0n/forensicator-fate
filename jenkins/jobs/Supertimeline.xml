@@ -38,7 +38,8 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>log2timeline.py ${OUTPUT_LOCATION}/plaso.dump $DISK_IMAGE_FILE
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+log2timeline.py ${OUTPUT_LOCATION}/plaso.dump $DISK_IMAGE_FILE
 psort.py -z$TIMEZONE -o L2tcsv -w ${OUTPUT_LOCATION}/supertimeline.csv ${OUTPUT_LOCATION}/plaso.dump</command>
     </hudson.tasks.Shell>
   </builders>

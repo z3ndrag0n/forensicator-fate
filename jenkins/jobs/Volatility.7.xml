@@ -43,7 +43,8 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>vol.py hivelist &gt;${OUTPUT_LOCATION}/hivelist_output
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+vol.py hivelist &gt;${OUTPUT_LOCATION}/hivelist_output
 vol.py userassist &gt;${OUTPUT_LOCATION}/userassist_output</command>
     </hudson.tasks.Shell>
   </builders>

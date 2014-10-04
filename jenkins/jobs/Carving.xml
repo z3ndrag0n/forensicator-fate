@@ -43,7 +43,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>blkls $DISK_IMAGE_FILE &gt;$UNALLOCATED_STORAGE_FILE
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+blkls $DISK_IMAGE_FILE &gt;$UNALLOCATED_STORAGE_FILE
 CLUSTER_SIZE=`fsstat $DISK_IMAGE_FILE | awk &apos;/Cluster Size: /{print $3}&apos;`
 foremost -q -b $CLUSTER_SIZE -o $FOREMOST_OUTPUT $UNALLOCATED_STORAGE_FILE</command>
     </hudson.tasks.Shell>

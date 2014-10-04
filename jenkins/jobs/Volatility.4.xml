@@ -43,7 +43,8 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>vol.py malfind --dump-dir ${OUTPUT_LOCATION} &gt;${OUTPUT_LOCATION}/malfind_output
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+vol.py malfind --dump-dir ${OUTPUT_LOCATION} &gt;${OUTPUT_LOCATION}/malfind_output
 vol.py ldrmodules -v &gt; ${OUTPUT_LOCATION}/ldrmodules_output</command>
     </hudson.tasks.Shell>
   </builders>

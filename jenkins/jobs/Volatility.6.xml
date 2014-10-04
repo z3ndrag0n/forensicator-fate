@@ -48,7 +48,8 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>if  [[ ! -d $VOLATILITY_OUTPUT_LOCATION ]] ; then
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+if  [[ ! -d $VOLATILITY_OUTPUT_LOCATION ]] ; then
 mkdir $VOLATILITY_OUTPUT_LOCATION
 fi
 vol.py dlldump --dump-dir ${VOLATILITY_OUTPUT_LOCATION} &gt;${OUTPUT_LOCATION}/dlldump_output

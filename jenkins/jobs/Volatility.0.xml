@@ -38,7 +38,8 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>vol.py imageinfo &gt;${OUTPUT_LOCATION}/imageinfo_output</command>
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+vol.py imageinfo &gt;${OUTPUT_LOCATION}/imageinfo_output</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

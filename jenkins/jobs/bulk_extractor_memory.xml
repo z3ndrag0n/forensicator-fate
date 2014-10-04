@@ -43,7 +43,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>if [[ ! -f $KEYWORDS_FILE ]]; then touch $KEYWORDS_FILE; fi
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+if [[ ! -f $KEYWORDS_FILE ]]; then touch $KEYWORDS_FILE; fi
 bulk_extractor -F $KEYWORDS_FILE -e net -e aes -e wordlist -o $MEMORY_ARTIFACTS $MEMORY_IMAGE_FILE</command>
     </hudson.tasks.Shell>
   </builders>

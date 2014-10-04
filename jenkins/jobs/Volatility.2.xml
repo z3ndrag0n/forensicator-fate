@@ -43,7 +43,8 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>vol.py dlllist &gt;${OUTPUT_LOCATION}/dlllist_output
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+vol.py dlllist &gt;${OUTPUT_LOCATION}/dlllist_output
 vol.py getsids &gt;${OUTPUT_LOCATION}/getsids_output
 vol.py handles &gt;${OUTPUT_LOCATION}/handles_output
 vol.py filescan &gt;${OUTPUT_LOCATION}/filescan_output

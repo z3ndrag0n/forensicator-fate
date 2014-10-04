@@ -43,7 +43,8 @@
   <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>vol.py pslist &gt;${OUTPUT_LOCATION}/pslist_output
+      <command>if [[ ! -d $OUTPUT_LOCATION ]]; then mkdir $OUTPUT_LOCATION; fi
+vol.py pslist &gt;${OUTPUT_LOCATION}/pslist_output
 vol.py psscan &gt;${OUTPUT_LOCATION}/psscan_output
 vol.py pstree &gt;${OUTPUT_LOCATION}/pstree_output</command>
     </hudson.tasks.Shell>
