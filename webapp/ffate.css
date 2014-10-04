@@ -1,0 +1,22 @@
+body {
+  height: 100%;
+  font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+  font-size: 62.5%;
+}
+
+iframe[name="frame2"] {
+  width: 95%;
+  height: auto !important;
+  min-height: 600;
+  //background-color: #666699;
+}
+
+table, td, th {
+  border: 1px solid green;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: green;
+  color: white;
+}

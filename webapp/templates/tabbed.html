@@ -1,0 +1,49 @@
+$def with (title, jenkins_url)
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+
+    <title>
+$if title: $title
+    </title>
+
+    <link rel="stylesheet" href="/static/themes/smoothness/jquery-ui.css">
+    <link href="/static/ffate.css" rel="Stylesheet" type="text/css">
+    <script type="text/javascript" src="/static/jquery.js"></script>
+    <script type="text/javascript" src="/static/jquery-ui.js"></script>
+    <script>
+$$(function() {
+$$( "#tabs" ).tabs({
+ beforeLoad: function( event, ui ) {
+    ui.jqXHR.error(function() {
+    ui.panel.html(
+      "Couldn't load this tab." +
+      'Please <a href="https://github.com/z3ndrag0n/forensicator-fate/issues/" target="new">Report</a> this.' );
+  });
+ }
+  });
+});
+    </script>
+
+
+  </head>
+  <body>
+<div id="tabs">
+  <ul>
+    <li><a href="search">Cases</a></li>
+<!--    <li><a href="/artifacts">Artifacts</a></li>-->
+    <li><a href="ioc">Indicators of Compromise</a></li>
+    <li><a href="ffate/hashdir.py">Reverse Engineering</a></li>
+  </ul>
+
+
+<!--
+  <div id="tabs-1">
+    <p>Tab 1</p>
+  </div>
+-->
+</div>
+
+    <a href="$jenkins_url" target="new">Tasks</a>
+  </body>
+</html>

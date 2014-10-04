@@ -1,0 +1,9 @@
+$def with (case, jenkins_job_url)
+
+<tr id="$case.id">
+<form action="$jenkins_job_url">
+
+<td>$case.id </td><td><input type="hidden" name="CASE_NAME" value="$case.casename">$case.casename </td><td><input type="hidden" name="MEMORY_IMAGE_FILE" value="$case.memory_image">$case.memory_image </td><td><input type="hidden" name="DISK_IMAGE_FILE" value="$case.disk_image">$case.disk_image </td><td><input type="hidden" name="DISK_NAME" value="$case.disk_name">$case.disk_name </td><td><input type="hidden" name="TIMEZONE" value="$case.timezone">$case.timezone </td><td><input type="hidden" name="VOLATILITY_PROFILE" value="$case.volatility_profile">$case.volatility_profile </td><td>$case.notes </td><td>$case.case_keywords </td>
+<td><input type="submit" value="Find Evidence"></td>
+</form>
+</tr>
