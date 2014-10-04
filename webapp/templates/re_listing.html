@@ -1,0 +1,17 @@
+$def with (walk)
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <link href="/static/ffate.css" rel="Stylesheet" type="text/css">
+  </head>
+  <body>
+
+$if walk:
+    <table>
+    <th>Name </th><th>Size </th><th>Hash </th>
+
+    $for (file, hash) in walk:
+        $:render.re_li(file, hash)
+    </table>
+
+</body>
