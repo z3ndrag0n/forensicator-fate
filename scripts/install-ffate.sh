@@ -2,7 +2,9 @@
 sudo easy_install web.py
 sudo apt-get install apache2
 sudo apt-get install libapache2-mod-wsgi
-sudo a2enmod rewrite
+sudo a2enmod rewrite wsgi
+
+sudo service apache2 restart
 
 sudo ed /etc/apache2/sites-available/default <<EOF
 /ErrorLog
@@ -48,7 +50,7 @@ sudo mv jquery-ui-1.11.1/images/ /var/www/public_html/
 sudo mv jquery-ui-themes-1.11.1/themes/ /var/www/public_html/
 
 sudo cp forensicator-fate/webapp/ffate.css /var/www/public_html/
-sudo cp forensicator-fate/webapp/ffate.py /var/www/public_html/
+sudo cp forensicator-fate/webapp/ffate.py /var/www/forensicator-fate/
 sudo cp -R forensicator-fate/webapp/templates /var/www/templates
 
 sudo service apache2 restart
