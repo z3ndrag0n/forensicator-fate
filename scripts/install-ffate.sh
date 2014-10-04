@@ -7,7 +7,7 @@ sudo a2enmod rewrite
 sudo ed /etc/apache2/sites-available/default <<EOF
 /ErrorLog
 i
-WSGIScriptAlias / /var/www/forensicator-fate
+WSGIScriptAlias /ffate /var/www/forensicator-fate/ffate.py
 Alias /static /var/www/public_html
 
 <Directory /var/www/forensicator-fate>
@@ -18,17 +18,16 @@ Alias /static /var/www/public_html
 AddType text/html .py
 
 <Location />
-  RewriteEngine on
-  RewriteBase /
-  RewriteCond %{REQUEST_URI} !^/static
-  RewriteCond %{REQUEST_URI} !^(/.*)+ffate.py/
-  RewriteRule ^(.*)$ ffate.py/$1 [PT]
+#  RewriteEngine on
+#  RewriteBase /
+#  RewriteCond %{REQUEST_URI} !^/static
+#  RewriteCond %{REQUEST_URI} !^(/.*)+ffate.py/
+#  RewriteRule ^(.*)$ ffate.py/$1 [PT]
 </Location>
 .
 w
 q
 EOF
-
 
 sudo mkdir /var/www/forensicator-fate
 sudo mkdir /var/www/public_html
