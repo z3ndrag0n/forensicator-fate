@@ -54,9 +54,12 @@ class ioc:
         for (dirname, dirs, files) in os.walk('/ioc'):
             for filename in files:
                 thefile = os.path.join(dirname,filename)
+                
+                # next 3 lines idea courtesy of Jeff Bryner http://www.jeffbryner.com/blog/itsec/pythoniocdump.html
                 ioc_root = lxml.objectify.parse(thefile).getroot()
                 short_desc = ioc_root.short_description
                 desc = ioc_root.description
+
                 name_hash.append(tuple([thefile, hashlib.md5(open(thefile, 'r').read()).hexdigest(), short_desc, desc]))
 
         return render.ioc_listing(name_hash)
