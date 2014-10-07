@@ -12,7 +12,8 @@ iframe[name="frame2"] {
 }
 
 table, td, th {
-  border: 1px solid green;
+  border: 2px solid green;
+  padding: 5px;
   border-collapse: collapse;
 }
 
