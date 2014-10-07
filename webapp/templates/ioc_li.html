@@ -1,7 +1,7 @@
-$def with (file, hash, uuid, author, modified, desc)
+$def with (file, hash, short_desc, desc)
 
 <tr>
 
-<td><a href="$file">$file</a> </td><td>$getsize(file) </td><td>$hash </td><td>$uuid </td><td>$author </td><td>$modified </td><td>$desc </td>
+<td><a href="$file" title="$desc">$file</a> </td><td>$getsize(file) </td><td>$hash </td><td>$short_desc </td>
 
 </tr>

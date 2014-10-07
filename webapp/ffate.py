@@ -2,10 +2,13 @@ import web, os, hashlib
 import requests
 import threading
 import time
+#import sys
+import lxml.objectify
 
 urls = (
     '/', 'index',
     '/reverse', 'reverse',
+    '/ioc','ioc',
     '/search', 'search',
     '/add','add',
     '/process', 'process'
@@ -43,6 +46,20 @@ class reverse:
                  name_hash.append(tuple([thefile, hashlib.md5(open(thefile, 'r').read()).hexdigest()]))
 
         return render.re_listing(name_hash)
+
+
+class ioc:
+    def GET(self):
+        name_hash = []
+        for (dirname, dirs, files) in os.walk('/ioc'):
+            for filename in files:
+                thefile = os.path.join(dirname,filename)
+                ioc_root = lxml.objectify.parse(thefile).getroot()
+                short_desc = ioc_root.short_description
+                desc = ioc_root.description
+                name_hash.append(tuple([thefile, hashlib.md5(open(thefile, 'r').read()).hexdigest(), short_desc, desc]))
+
+        return render.ioc_listing(name_hash)
 
 
 class search:

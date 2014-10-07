@@ -8,10 +8,10 @@ $def with (walk)
 
 $if walk:
     <table>
-    <th>IOC </th><th>Size </th><th>Hash </th><th>UUID </th><th>Author </th><th>Last Modified </th><th>Description </th>
+    <th>IOC </th><th>Size </th><th>Hash </th><th>Description </th>
 
-    $for (file, hash, uuid, author, modified, desc) in walk:
-        $:render.ioc_li(file, hash, uuid, author, modified, desc)
+    $for (file, hash, short_desc, desc) in walk:
+        $:render.ioc_li(file, hash, short_desc, desc)
     </table>
 
 </body>
