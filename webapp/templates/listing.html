@@ -8,22 +8,22 @@ $def with (cases, jenkins_job_url)
 
 $if cases:
     <table>
-    <th>id </th><th>casename </th><th>memory image </th><th>disk image </th><th>disk name </th><th>timezone </th><th>volatility_profile </th><th>notes </th><th>keywords </th>
+    <th>id </th><th>casename </th><th>memory image </th><th>disk image </th><th>disk name </th><th>timezone </th><th>volatility_profile </th><th>notes </th><th>keywords </th><th> </th>
 
     $for case in cases:
         $:render.li(case,jenkins_job_url)
     </table>
 
 <form method="post" action="add">
-<p>Case Name: <input type="text" name="casename" />
-Memory Image: <input type="text" name="memory_image" />
-Disk Image: <input type="text" name="disk_image" />
-Disk Name: <input type="text" name="disk_name" />
-Timezone: <input type="text" name="timezone" />
-Volatility Profile: <input type="text" name="volatility_profile" />
-Notes: <input type="text" name="notes" />
-Keywords: <input type="text" name="case_keywords" />
-<input type="submit" value="New Case" /></p>
+<p>Case Name: <input type="text" name="casename" /><br>
+Memory Image: <input type="text" name="memory_image" /><br>
+Disk Image: <input type="text" name="disk_image" /><br>
+Disk Name: <input type="text" name="disk_name" /><br>
+Timezone: <input type="text" name="timezone" /><br>
+Volatility Profile: <input type="text" name="volatility_profile" /><br>
+Notes: <input type="text" name="notes" /><br>
+Keywords: <input type="text" name="case_keywords" /><br>
+<input type="submit" value="New Case" /></p><br>
 </form>
 
 </body>
