@@ -1,0 +1,16 @@
+$def with (config_vars)
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <link href="/static/ffate.css" rel="Stylesheet" type="text/css">
+  </head>
+  <body>
+
+$if config_vars:
+    <table>
+    <th>Parameter Name</th><th>Parameter Value </th>
+
+    $for config_var in config_vars:
+        $:render.cfg_li(config_var)
+    </table>
+</body>

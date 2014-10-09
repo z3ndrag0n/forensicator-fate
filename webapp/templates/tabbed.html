@@ -1,4 +1,4 @@
-$def with (title, jenkins_url)
+$def with (title, jenkins_url, plaso_url)
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
   <head>
@@ -34,6 +34,7 @@ $$( "#tabs" ).tabs({
 <!--    <li><a href="/artifacts">Artifacts</a></li>-->
     <li><a href="ioc">Indicators of Compromise</a></li>
     <li><a href="reverse">Reverse Engineering</a></li>
+    <li><a href="config">Configuration</a></li>
   </ul>
 
 
@@ -44,6 +45,6 @@ $$( "#tabs" ).tabs({
 -->
 </div>
 
-    <a href="$jenkins_url" target="new">Tasks</a>
+    <a href="$plaso_url" target="new_3">Plaso dash</a> <a href="$jenkins_url" target="new">Tasks</a> <a href="https://github.com/z3ndrag0n/forensicator-fate/issues" target="new_2">Issues</a>
   </body>
 </html>

@@ -2,7 +2,6 @@ import web, os, hashlib
 import requests
 import threading
 import time
-#import sys
 import lxml.objectify
 
 urls = (
@@ -11,7 +10,8 @@ urls = (
     '/ioc','ioc',
     '/search', 'search',
     '/add','add',
-    '/process', 'process'
+    '/process', 'process',
+    '/config', 'config'
 )
 
 db = web.database(dbn='postgres', db='webpy', user='webpy', pw='')
@@ -23,11 +23,19 @@ web.template.Template.globals.update(dict(
   getsize = os.path.getsize,
 ))
 
+param_results = db.select('config',what='param_value', where='param_name = \'ELK-IP\'')
+for plaso_result in param_results:
+    plaso_ip = plaso_result.param_value
+param_results = db.select('config',what='param_value', where='param_name = \'Plaso-dash\'')
+for plaso_result in param_results:
+    plaso_dash = plaso_result.param_value
+plaso_url = "http://" + plaso_ip + ":9292/index.html#/dashboard/file/" + plaso_dash
+
 
 class index:
     def GET(self):
         jenkins_url = web.ctx.homedomain + ":8080/"
-        return render.tabbed("Forensicator FATE", jenkins_url)
+        return render.tabbed("Forensicator FATE", jenkins_url, plaso_url)
 
 
 class add:
@@ -66,12 +74,13 @@ class ioc:
 
 
 class search:
-    # def POST(self):
-        # i = web.input()
-        # print i
-        # return render.listing(db.select('cases',what='*',order='id',limit=10000))
     def GET(self):
         return render.listing(db.select('cases',what='*',order='id',limit=10000), 'process')
+
+
+class config:
+    def GET(self):
+        return render.cfg_listing(db.select('config',what='*',limit=10000))
 
 
 class process:
@@ -81,9 +90,6 @@ class process:
         jenkins_job_url = jenkins_url + "job/findWindowsEvidence/buildWithParameters"
         jenkins_job_url_with_params = jenkins_job_url + "?CASE_NAME=" + i.CASE_NAME + "&MEMORY_IMAGE_FILE=" + i.MEMORY_IMAGE_FILE + "&DISK_IMAGE_FILE=" + i.DISK_IMAGE_FILE + "&DISK_NAME=" + i.DISK_NAME + "&TIMEZONE=" + i.TIMEZONE + "&VOLATILITY_PROFILE=" + i.VOLATILITY_PROFILE
         threading.Thread(target=requests.get, args=(jenkins_job_url_with_params,)).start()
-        # print jenkins_job_url_with_params
-        # print i
-        # time.sleep(1)
         raise web.seeother('/')
 
 
