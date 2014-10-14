@@ -11,7 +11,8 @@ urls = (
     '/search', 'search',
     '/add','add',
     '/process', 'process',
-    '/config', 'config'
+    '/config', 'config',
+    '/dash','dashboard'
 )
 
 db = web.database(dbn='postgres', db='webpy', user='webpy', pw='')
@@ -30,7 +31,8 @@ param_results = db.select('config',what='param_value', where='param_name = \'Pla
 for plaso_result in param_results:
     plaso_dash = plaso_result.param_value
 plaso_url = "http://" + plaso_ip + ":9292/index.html#/dashboard/file/" + plaso_dash
-
+for572_url = "http://" + plaso_ip + ":9292/index.html#/dashboard/file/for572.json"
+xplico_url = "http://" + plaso_ip + ":9876/"
 
 class index:
     def GET(self):
@@ -81,6 +83,12 @@ class search:
 class config:
     def GET(self):
         return render.cfg_listing(db.select('config',what='*',limit=10000))
+
+
+class dashboard:
+    def GET(self):
+        jenkins_url = web.ctx.homedomain + ":8080/"
+        return render.dash(plaso_url, jenkins_url, for572_url, xplico_url)
 
 
 class process:
