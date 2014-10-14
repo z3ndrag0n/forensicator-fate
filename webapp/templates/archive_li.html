@@ -1,0 +1,12 @@
+$def with (case)
+
+<tr id="$case.id">
+
+<td>$case.id </td><td>$case.casename </td><td>$case.memory_image </td><td>$case.disk_image </td><td>$case.disk_name </td><td>$case.timezone </td><td>$case.volatility_profile </td><td>$case.notes </td><td>$case.case_keywords </td>
+<td>
+<form action="reopen" method="post" id="close_$case.id">
+<input type="hidden" name="CASE_ID" value="$case.id">
+<input type="submit" value="Re-open">
+</form>
+</td>
+</tr>

@@ -4,7 +4,7 @@ $def with (case, jenkins_job_url)
 
 <td>$case.id </td><td>$case.casename </td><td>$case.memory_image </td><td>$case.disk_image </td><td>$case.disk_name </td><td>$case.timezone </td><td>$case.volatility_profile </td><td>$case.notes </td><td>$case.case_keywords </td>
 <td>
-<form action="$jenkins_job_url" method="post" id="$case.id">
+<form action="$jenkins_job_url" method="post" id="process_$case.id">
 <input type="hidden" name="CASE_NAME" value="$case.casename">
 <input type="hidden" name="MEMORY_IMAGE_FILE" value="$case.memory_image">
 <input type="hidden" name="DISK_IMAGE_FILE" value="$case.disk_image">
@@ -12,6 +12,12 @@ $def with (case, jenkins_job_url)
 <input type="hidden" name="TIMEZONE" value="$case.timezone">
 <input type="hidden" name="VOLATILITY_PROFILE" value="$case.volatility_profile">
 <input type="submit" value="Find Evidence">
+</form>
+</td>
+<td>
+<form action="close" method="post" id="close_$case.id">
+<input type="hidden" name="CASE_ID" value="$case.id">
+<input type="submit" value="Close">
 </form>
 </td>
 </tr>

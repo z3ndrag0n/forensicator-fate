@@ -1,0 +1,17 @@
+$def with (cases)
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <link href="/static/ffate.css" rel="Stylesheet" type="text/css">
+  </head>
+  <body>
+
+$if cases:
+    <table>
+    <th>id </th><th>casename </th><th>memory image </th><th>disk image </th><th>disk name </th><th>timezone </th><th>volatility_profile </th><th>notes </th><th>keywords </th><th> </th>
+
+    $for case in cases:
+        $:render.archive_li(case)
+    </table>
+
+</body>

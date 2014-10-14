@@ -8,7 +8,7 @@ $def with (cases, jenkins_job_url)
 
 $if cases:
     <table>
-    <th>id </th><th>casename </th><th>memory image </th><th>disk image </th><th>disk name </th><th>timezone </th><th>volatility_profile </th><th>notes </th><th>keywords </th><th> </th>
+    <th>id </th><th>casename </th><th>memory image </th><th>disk image </th><th>disk name </th><th>timezone </th><th>volatility_profile </th><th>notes </th><th>keywords </th><th> </th><th> </th>
 
     $for case in cases:
         $:render.li(case,jenkins_job_url)

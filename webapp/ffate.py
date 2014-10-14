@@ -9,10 +9,13 @@ urls = (
     '/reverse', 'reverse',
     '/ioc','ioc',
     '/search', 'search',
+    '/search_archive', 'search_archive',
     '/add','add',
     '/process', 'process',
     '/config', 'config',
-    '/dash','dashboard'
+    '/dash','dashboard',
+    '/close','close',
+    '/reopen','reopen'
 )
 
 db = web.database(dbn='postgres', db='webpy', user='webpy', pw='')
@@ -24,6 +27,7 @@ web.template.Template.globals.update(dict(
   getsize = os.path.getsize,
 ))
 
+
 param_results = db.select('config',what='param_value', where='param_name = \'ELK-IP\'')
 for plaso_result in param_results:
     plaso_ip = plaso_result.param_value
@@ -34,6 +38,7 @@ plaso_url = "http://" + plaso_ip + ":9292/index.html#/dashboard/file/" + plaso_d
 for572_url = "http://" + plaso_ip + ":9292/index.html#/dashboard/file/for572.json"
 xplico_url = "http://" + plaso_ip + ":9876/"
 
+
 class index:
     def GET(self):
         jenkins_url = web.ctx.homedomain + ":8080/"
@@ -43,7 +48,21 @@ class index:
 class add:
     def POST(self):
         i = web.input()
-        n = db.insert('cases', casename=i.casename,memory_image=i.memory_image,disk_image=i.disk_image,disk_name=i.disk_name,timezone=i.timezone,volatility_profile=i.volatility_profile,notes=i.notes,case_keywords=i.case_keywords)
+        n = db.insert('cases', casename=i.casename,memory_image=i.memory_image,disk_image=i.disk_image,disk_name=i.disk_name,timezone=i.timezone,volatility_profile=i.volatility_profile,notes=i.notes,case_keywords=i.case_keywords,status='open')
+        raise web.seeother('/')
+
+
+class close:
+    def POST(self):
+        i = web.input()
+        n = db.update('cases', where="id = " + i.CASE_ID,status='closed')
+        raise web.seeother('/')
+
+
+class reopen:
+    def POST(self):
+        i = web.input()
+        n = db.update('cases', where="id = " + i.CASE_ID,status='open')
         raise web.seeother('/')
 
 
@@ -77,7 +96,12 @@ class ioc:
 
 class search:
     def GET(self):
-        return render.listing(db.select('cases',what='*',order='id',limit=10000), 'process')
+        return render.listing(db.select('cases',what='*',where="status is null or status<>'closed'",order='id',limit=10000), 'process')
+
+
+class search_archive:
+    def GET(self):
+        return render.archive_listing(db.select('cases',what='*',where="status='closed'",order='id',limit=10000))
 
 
 class config:
