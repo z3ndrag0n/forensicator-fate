@@ -7,8 +7,10 @@ echo "Please enter your ELK IP address,which is displayed"
 echo -n "on the console of the VM: "
 read ELK_IP
 
+cd ~
 forensicator-fate/scripts/install-pyelasticsearch.sh ${ELK_IP}
 forensicator-fate/scripts/create-shares.sh
 forensicator-fate/scripts/install-jenkins.sh
 forensicator-fate/scripts/install-pg.sh ${ELK_IP}
 forensicator-fate/scripts/install-ffate.sh
+cp forensicator-fate/ffate.pdf Desktop/
