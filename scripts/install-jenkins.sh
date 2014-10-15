@@ -43,6 +43,7 @@ java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 crea
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-job IOC <forensicator-fate/jenkins/jobs/IOC.xml
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-job NSRL <forensicator-fate/jenkins/jobs/NSRL.xml
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-job sorter <forensicator-fate/jenkins/jobs/sorter.xml
+java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-job PlasoExporter <forensicator-fate/jenkins/jobs/PlasoExporter.xml
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-job Supertimeline <forensicator-fate/jenkins/jobs/Supertimeline.xml
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-job Volatility.0 <forensicator-fate/jenkins/jobs/Volatility.0.xml
 java -jar /run/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 create-job Volatility.1 <forensicator-fate/jenkins/jobs/Volatility.1.xml
