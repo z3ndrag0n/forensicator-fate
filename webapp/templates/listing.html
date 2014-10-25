@@ -3,29 +3,154 @@ $def with (cases, jenkins_job_url)
 <html>
   <head>
     <link href="/static/ffate.css" rel="Stylesheet" type="text/css">
+    <link rel="stylesheet" href="//172.1.223.159/static/jquery-ui.css">
+    <script src="//172.1.223.159/static/jquery.js"></script>
+    <script src="//172.1.223.159/static/jquery-ui.js"></script>
+
+
+   <script>
+    $$(function() {
+    var dialog, form,
+ 
+      casename = $$( "#casename" ),
+      memory_image = $$( "#memory_image" ),
+      disk_image = $$( "#disk_image" ),
+      disk_name = $$( "#disk_name" ),
+      timezone = $$( "#timezone" ),
+      volatility_profile = $$( "#volatility_profile" ),
+      notes = $$( "#notes" ),
+      case_keywords = $$( "#case_keywords" ),
+      allFields = $$( [] ).add( casename ).add( memory_image ).add( disk_image ).add( disk_name ).add( timezone ).add( volatility_profile ).add( notes ).add( case_keywords ),
+      tips = $$( ".validateTips" );
+ 
+    function updateTips( t ) {
+      tips
+        .text( t )
+        .addClass( "ui-state-highlight" );
+      setTimeout(function() {
+        tips.removeClass( "ui-state-highlight", 1500 );
+      }, 500 );
+    }
+ 
+    function checkLength( o, n, min, max ) {
+      if ( o.val().length > max || o.val().length < min ) {
+        o.addClass( "ui-state-error" );
+        updateTips( "Length of " + n + " must be between " +
+          min + " and " + max + "." );
+        return false;
+      } else {
+        return true;
+      }
+    }
+ 
+    function checkRegexp( o, regexp, n ) {
+      if ( !( regexp.test( o.val() ) ) ) {
+        o.addClass( "ui-state-error" );
+        updateTips( n );
+        return false;
+      } else {
+        return true;
+      }
+    }
+ 
+    function addCase( event ) {
+      var valid = true;
+      allFields.removeClass( "ui-state-error" );
+ 
+      valid = valid && checkLength( casename, "casename", 1, 255 );
+      valid = valid && (checkLength( memory_image, "memory_image", 5, 255 ) || checkLength( disk_image, "disk_image", 5, 255 ));
+      valid = valid && checkLength( disk_name, "disk_name", 2, 255 );
+      valid = valid && checkLength( timezone, "timezone", 2, 38 );
+ 
+<!--
+      valid = valid && checkRegexp( casename, nameRegex, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+      valid = valid && checkRegexp( email, emailRegex, 'eg. ui@jquery.com' );
+      valid = valid && checkRegexp( password, passwordRegex, "Password field only allow : a-z 0-9" );
+ -->
+      if ( valid ) {
+        dialog.dialog( "close" );
+      }
+      else {
+        event.preventDefault();
+      }
+      return valid;
+    }
+ 
+    dialog = $$( "#dialog-form" ).dialog({
+      autoOpen: false,
+      width: 500,
+      modal: true,
+      dialogClass: 'ui-dialog-case',
+      buttons: [
+        {
+          text: "Create a case",
+          click: $$.noop,
+          type: "submit",
+          form: "createCase"                      // Idea from TJ VanToll - nice!
+        },
+        {
+          text: "Cancel",
+          click: function() {
+            dialog.dialog( "close" );
+          }
+        }
+      ],
+      close: function() {
+        form[ 0 ].reset();
+        allFields.removeClass( "ui-state-error" );
+      }
+    });
+ 
+    form = dialog.find( "form" ).on( "submit", function( event ) {
+      addCase( event );
+    });
+ 
+    $$( "#create-case" ).button().on( "click", function() {
+      dialog.dialog( "open" );
+    });
+  });
+  </script>
   </head>
   <body>
 
 $if cases:
-    <table>
+    <table id="cases" >
     <th>id </th><th>casename </th><th>memory image </th><th>disk image </th><th>disk name </th><th>timezone </th><th>volatility_profile </th><th>notes </th><th>keywords </th><th> </th><th> </th>
 
     $for case in cases:
         $:render.li(case,jenkins_job_url)
     </table>
 
-<form method="post" action="add">
 
-<p><label for="casename">Case Name</label> <input type="text" name="casename" /></p>
-<p><label for="memory_image">Memory Image</label> <input type="text" name="memory_image" /></p>
-<p><label for="disk_image">Disk Image</label> <input type="text" name="disk_image" /></p>
-<p><label for="disk_name">Disk Name</label> <input type="text" name="disk_name" /></p>
-<p><label for="timezone">Timezone</label> <input type="text" name="timezone" /></p>
-<p><label for="volatility_profile">Volatility Profile</label> <input type="text" name="volatility_profile" /></p>
-<p><label for="notes">Notes</label> <input type="text" name="notes" /></p>
-<p><label for="case_keywords">Keywords</label> <input type="text" name="case_keywords" /></p>
+    <div id="dialog-form" title="Create new case">
+      <p class="validateTips">Required fields are case_name, at least one image file and timezone.</p>
+ 
+      <form id="createCase" method="post" action="add">
+        <fieldset>
+          <label for="casename">Case Name</label>
+          <input type="text" name="casename" id="casename" class="text ui-widget-content ui-corner-all">
+          <label for="memory_image">Memory Image</label>
+          <input type="text" name="memory_image" id="memory_image" class="text ui-widget-content ui-corner-all">
+          <label for="disk_image">Disk Image</label>
+          <input type="text" name="disk_image" id="disk_image" class="text ui-widget-content ui-corner-all">
+          <label for="disk_name">Disk Name</label>
+          <input type="text" name="disk_name" id="disk_name" class="text ui-widget-content ui-corner-all">
+          <label for="timezone">Timezone</label>
+          <input type="text" name="timezone" id="timezone" class="text ui-widget-content ui-corner-all">
+          <label for="volatility_profile">Volatility Profile</label>
+          <input type="text" name="volatility_profile" id="volatility_profile" class="text ui-widget-content ui-corner-all">
+          <label for="notes">Notes</label>
+          <input type="text" name="notes" id="notes" class="text ui-widget-content ui-corner-all">
+          <label for="case_keywords">Keywords</label>
+          <input type="text" name="case_keywords" id="case_keywords" class="text ui-widget-content ui-corner-all">
 
-<p class="submit"><input type="submit" value="New Case" /></p>
-</form>
+          <!-- Allow form submission with keyboard without duplicating the dialog button -->
+          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 
-</body>
+        <!--<input type="submit" value="New Case" />-->
+        </fieldset>
+      </form>
+    </div>
+    <button id="create-case">Create new case</button>
+  </body>
+</html>
