@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 while(<>) {
-    if (/Suggested Profile\(s\) \: (.*)$/) {
+    if (/Suggested Profile\(s\) \: (.*?)( \(Instantiated with .*)?$/) {
         $profiles = $1;
         @profiles = split / |,/, $profiles;
     }
