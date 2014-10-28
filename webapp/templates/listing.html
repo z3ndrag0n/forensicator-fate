@@ -122,35 +122,35 @@ $if cases:
     </table>
 
 
-    <div id="dialog-form" title="Create new case">
-      <p class="validateTips">Required fields are case_name, at least one image file and timezone.</p>
+<div id="dialog-form" title="Create new case">
+  <p class="validateTips">Required fields are case_name, at least one image file and timezone.</p>
  
-      <form id="createCase" method="post" action="add">
-        <fieldset>
-          <label for="casename">Case Name</label>
-          <input type="text" name="casename" id="casename" class="text ui-widget-content ui-corner-all">
-          <label for="memory_image">Memory Image</label>
-          <input type="text" name="memory_image" id="memory_image" class="text ui-widget-content ui-corner-all">
-          <label for="disk_image">Disk Image</label>
-          <input type="text" name="disk_image" id="disk_image" class="text ui-widget-content ui-corner-all">
-          <label for="disk_name">Disk Name</label>
-          <input type="text" name="disk_name" id="disk_name" class="text ui-widget-content ui-corner-all">
-          <label for="timezone">Timezone</label>
-          <input type="text" name="timezone" id="timezone" class="text ui-widget-content ui-corner-all">
-          <label for="volatility_profile">Volatility Profile</label>
-          <input type="text" name="volatility_profile" id="volatility_profile" class="text ui-widget-content ui-corner-all">
-          <label for="notes">Notes</label>
-          <input type="text" name="notes" id="notes" class="text ui-widget-content ui-corner-all">
-          <label for="case_keywords">Keywords</label>
-          <input type="text" name="case_keywords" id="case_keywords" class="text ui-widget-content ui-corner-all">
+  <form id="createCase" method="post" action="add">
+    <fieldset>
+      <label for="casename">Case Name</label>
+      <input type="text" name="casename" id="casename" class="text ui-widget-content ui-corner-all">
+      <label for="memory_image">Memory Image</label>
+      <input type="text" name="memory_image" id="memory_image" class="text ui-widget-content ui-corner-all">
+      <label for="disk_image">Disk Image</label>
+      <input type="text" name="disk_image" id="disk_image" class="text ui-widget-content ui-corner-all">
+      <label for="disk_name">Disk Name</label>
+      <input type="text" name="disk_name" id="disk_name" class="text ui-widget-content ui-corner-all">
+      <label for="timezone">Timezone</label>
+      <input type="text" name="timezone" id="timezone" class="text ui-widget-content ui-corner-all">
+      <label for="volatility_profile">Volatility Profile</label>
+      <input type="text" name="volatility_profile" id="volatility_profile" class="text ui-widget-content ui-corner-all">
+      <label for="notes">Notes</label>
+      <input type="text" name="notes" id="notes" class="text ui-widget-content ui-corner-all">
+      <label for="case_keywords">Keywords</label>
+      <input type="text" name="case_keywords" id="case_keywords" class="text ui-widget-content ui-corner-all">
 
-          <!-- Allow form submission with keyboard without duplicating the dialog button -->
-          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 
-        <!--<input type="submit" value="New Case" />-->
-        </fieldset>
-      </form>
-    </div>
-    <button id="create-case">Create new case</button>
-  </body>
+    <!--<input type="submit" value="New Case" />-->
+    </fieldset>
+  </form>
+</div>
+<button id="create-case">Create new case</button>
+</body>
 </html>
