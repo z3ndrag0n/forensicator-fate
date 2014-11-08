@@ -15,7 +15,9 @@ urls = (
     '/config', 'config',
     '/dash','dashboard',
     '/close','close',
-    '/reopen','reopen'
+    '/reopen','reopen',
+    '/view','view',
+    '/vss_scan','vss_scan'
 )
 
 db = web.database(dbn='postgres', db='webpy', user='webpy', pw='')
@@ -94,9 +96,14 @@ class ioc:
         return render.ioc_listing(name_hash)
 
 
+class view:
+    def POST(self):
+        raise web.seeother('/')
+
+
 class search:
     def GET(self):
-        return render.listing(db.select('cases',what='*',where="status is null or status<>'closed'",order='id',limit=10000), 'process')
+        return render.listing(db.select('cases',what='*',where="status is null or status<>'closed'",order='id',limit=10000), 'process','view','vss_scan')
 
 
 class search_archive:
@@ -121,7 +128,13 @@ class process:
         jenkins_url = web.ctx.homedomain + ":8080/"
         jenkins_job_url = jenkins_url + "job/findWindowsEvidence/buildWithParameters"
         jenkins_job_url_with_params = jenkins_job_url + "?CASE_NAME=" + i.CASE_NAME + "&MEMORY_IMAGE_FILE=" + i.MEMORY_IMAGE_FILE + "&DISK_IMAGE_FILE=" + i.DISK_IMAGE_FILE + "&DISK_NAME=" + i.DISK_NAME + "&TIMEZONE=" + i.TIMEZONE + "&VOLATILITY_PROFILE=" + i.VOLATILITY_PROFILE
+        n = db.update('cases', where="id = " + i.CASE_ID,status='processing')
         threading.Thread(target=requests.get, args=(jenkins_job_url_with_params,)).start()
+        raise web.seeother('/')
+
+
+class vss_scan:
+    def POST(self):
         raise web.seeother('/')
 
 

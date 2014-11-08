@@ -1,4 +1,4 @@
-$def with (cases, jenkins_job_url)
+$def with (cases, jenkins_job_url, view_url, scan_url)
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
   <head>
@@ -118,7 +118,7 @@ $if cases:
     <th>id </th><th>casename </th><th>memory image </th><th>disk image </th><th>disk name </th><th>timezone </th><th>volatility_profile </th><th>notes </th><th>keywords </th><th> </th><th> </th>
 
     $for case in cases:
-        $:render.li(case,jenkins_job_url)
+        $:render.li(case,jenkins_job_url, view_url, scan_url)
     </table>
 
 

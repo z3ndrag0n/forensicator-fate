@@ -1,23 +1,54 @@
-$def with (case, jenkins_job_url)
+$def with (case, jenkins_job_url, view_url, scan_url)
 
 <tr id="$case.id">
 
 <td>$case.id </td><td>$case.casename </td><td>$case.memory_image </td><td>$case.disk_image </td><td>$case.disk_name </td><td>$case.timezone </td><td>$case.volatility_profile </td><td>$case.notes </td><td>$case.case_keywords </td>
 <td>
-<form action="$jenkins_job_url" method="post" id="process_$case.id">
-<input type="hidden" name="CASE_NAME" value="$case.casename">
-<input type="hidden" name="MEMORY_IMAGE_FILE" value="$case.memory_image">
-<input type="hidden" name="DISK_IMAGE_FILE" value="$case.disk_image">
-<input type="hidden" name="DISK_NAME" value="$case.disk_name">
-<input type="hidden" name="TIMEZONE" value="$case.timezone">
-<input type="hidden" name="VOLATILITY_PROFILE" value="$case.volatility_profile">
-<input type="submit" value="Find Evidence">
-</form>
+$if (case.status == "open"):
+  <form action="$jenkins_job_url" method="post" id="process_$case.id">
+  <input type="hidden" name="CASE_NAME" value="$case.casename">
+  <input type="hidden" name="MEMORY_IMAGE_FILE" value="$case.memory_image">
+  <input type="hidden" name="DISK_IMAGE_FILE" value="$case.disk_image">
+  <input type="hidden" name="DISK_NAME" value="$case.disk_name">
+  <input type="hidden" name="TIMEZONE" value="$case.timezone">
+  <input type="hidden" name="VOLATILITY_PROFILE" value="$case.volatility_profile">
+  <input type="submit" value="Find Evidence">
+  </form>
+$elif (case.status == "processing"):
+  Scanning...<img src="/static/ajax-loader.gif" alt="...">
+$elif (case.status == "complete" or case.status == "vss_found" or case.status == "vss_scanning" or case.status == "vss_complete"):
+  <form action="$view_url" method="post" id="view_$case.id">
+  <input type="hidden" name="CASE_NAME" value="$case.casename">
+  <input type="hidden" name="MEMORY_IMAGE_FILE" value="$case.memory_image">
+  <input type="hidden" name="DISK_IMAGE_FILE" value="$case.disk_image">
+  <input type="hidden" name="DISK_NAME" value="$case.disk_name">
+  <input type="hidden" name="TIMEZONE" value="$case.timezone">
+  <input type="hidden" name="VOLATILITY_PROFILE" value="$case.volatility_profile">
+  <input type="submit" value="View Evidence">
+  </form>
+$else:
+  Unknown Status
+
+$if (case.status == "vss_found"):
+  <form action="$scan_url" method="post" id="scan_$case.id">
+  <input type="hidden" name="CASE_NAME" value="$case.casename">
+  <input type="hidden" name="MEMORY_IMAGE_FILE" value="$case.memory_image">
+  <input type="hidden" name="DISK_IMAGE_FILE" value="$case.disk_image">
+  <input type="hidden" name="DISK_NAME" value="$case.disk_name">
+  <input type="hidden" name="TIMEZONE" value="$case.timezone">
+  <input type="hidden" name="VOLATILITY_PROFILE" value="$case.volatility_profile">
+  <input type="submit" value="VSS DeepScan">
+  </form>
+$elif (case.status == "vss_scanning"):
+  VSS...<img src="/static/ajax-loader.gif" alt="...">
+ 
 </td>
 <td>
-<form action="close" method="post" id="close_$case.id">
-<input type="hidden" name="CASE_ID" value="$case.id">
-<input type="submit" value="Close">
-</form>
+$if (case.status != "processing" and case.status != "vss_scanning"):
+  <form action="close" method="post" id="close_$case.id">
+  <input type="hidden" name="CASE_ID" value="$case.id">
+  <input type="submit" value="Close">
+  </form>
+
 </td>
 </tr>
