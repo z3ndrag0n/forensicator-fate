@@ -19,7 +19,8 @@ sudo service jenkins restart
 #update Jenkins
 cd /usr/share/jenkins
 sudo mv jenkins.war jenkins-last-install.war
-sudo curl -o jenkins.war -L http://updates.jenkins-ci.org/download/war/latest/jenkins.war
+# need to pin this to 1.575 as this is where jenkins devs (re)broke the cli
+sudo curl -o jenkins.war -L http://updates.jenkins-ci.org/download/war/1.575/jenkins.war
 cd ~
 sudo service jenkins restart
 
